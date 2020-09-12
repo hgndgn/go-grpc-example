@@ -1,0 +1,39 @@
+
+syntax = "proto3";
+
+option go_package = "hgndgn/grpc/service/sorting";
+
+package sorting;
+
+service Sorting {
+  rpc StringSort(StringInput) returns (StringResult) {}
+  rpc Int32Sort(Int32Input) returns (Int32Result) {}
+  rpc PersonSortByAge(PersonList) returns (PersonList) {}
+  rpc PersonSortByName(PersonList) returns (PersonList) {}
+}
+
+message StringInput {
+  string value = 1;
+}
+
+message StringResult {
+  string value = 1;
+}
+
+message Int32Input {
+  repeated int32 values = 1 [packed=true]; 
+}
+
+message Int32Result {
+  repeated int32 values = 1 [packed=true]; 
+}
+
+
+message Person {
+  string name = 1;
+  int32 age = 2;
+}
+
+message PersonList {
+  repeated Person persons = 1;
+}
