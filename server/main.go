@@ -20,9 +20,9 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	s := grpc.NewServer()
+	server := grpc.NewServer()
 
-	pb.RegisterSortingService(s, &pb.SortingService{
+	pb.RegisterSortingService(server, &pb.SortingService{
 		StringSort:       StringSort,
 		Int32Sort:        Int32Sort,
 		PersonSortByAge:  PersonSortByAge,
@@ -30,7 +30,7 @@ func main() {
 	})
 
 	fmt.Printf("Listening on port %v\n", port)
-	if err := s.Serve(lis); err != nil {
+	if err := server.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }
